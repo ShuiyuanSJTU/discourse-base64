@@ -2,5 +2,5 @@ zh_CN:
   theme_metadata:
     description: ""
   base64:
-    encode: "BASE64 编码"
-    decode: "BASE64 解码"
+    encode: "Base64 编码"
+    decode: "Base64 解码"
