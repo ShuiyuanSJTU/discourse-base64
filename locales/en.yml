@@ -1,3 +1,6 @@
 en:
   theme_metadata:
     description: ""
+  base64:
+    encode: "BASE64 Encode"
+    decode: "BASE64 Decode"

@@ -5,7 +5,7 @@ export default apiInitializer("0.11.1", (api) => {
     return {
       action: "encode",
       icon: "far-eye-slash",
-      label: "composer.spoiler_ui_button_title_a",
+      label: themePrefix("base64.encode"),
     };
   });
 
@@ -13,16 +13,18 @@ export default apiInitializer("0.11.1", (api) => {
     return {
       action: "decode",
       icon: "far-eye",
-      label: "composer.spoiler_ui_button_title_b",
+      label: themePrefix("base64.decode"),
     };
   });
 
   api.modifyClass("controller:composer", {
+    pluginId: "discourse-base64",
+
     actions: {
       encode() {
         var _keyStr =
           "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        var input = encodeURI(this.toolbarEvent.getText());
+        var input = encodeURI(this.get("toolbarEvent").selected.value);
         var output = "";
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
         var i = 0;
@@ -47,13 +49,13 @@ export default apiInitializer("0.11.1", (api) => {
             _keyStr.charAt(enc3) +
             _keyStr.charAt(enc4);
         }
-        this.toolbarEvent.replaceText(output);
+        this.get("toolbarEvent").addText(output);
       },
 
       decode() {
         var _keyStr =
           "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        var input = this.toolbarEvent.getText();
+        var input = this.get("toolbarEvent").selected.value;
         var output = "";
         var chr1, chr2, chr3;
         var enc1, enc2, enc3, enc4;
@@ -75,8 +77,7 @@ export default apiInitializer("0.11.1", (api) => {
             output = output + String.fromCharCode(chr3);
           }
         }
-
-        this.toolbarEvent.replaceText(decodeURI(output));
+        this.get("toolbarEvent").addText(decodeURI(output));
       },
     },
   });
