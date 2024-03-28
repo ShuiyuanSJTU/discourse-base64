@@ -1,7 +1,7 @@
 import { apiInitializer } from "discourse/lib/api";
 
 export default apiInitializer("0.11.1", (api) => {
-  api.addToolbarPopupMenuOptionsCallback(() => {
+  api.addComposerToolbarPopupMenuOption(() => {
     return {
       action: "encode",
       icon: "far-eye-slash",
@@ -9,7 +9,7 @@ export default apiInitializer("0.11.1", (api) => {
     };
   });
 
-  api.addToolbarPopupMenuOptionsCallback(() => {
+  api.addComposerToolbarPopupMenuOption(() => {
     return {
       action: "decode",
       icon: "far-eye",
